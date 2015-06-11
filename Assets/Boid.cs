@@ -151,4 +151,27 @@ public class Boid : MonoBehaviour {
 		Vector3 avg = sum / someBoids.Count;
 		return (avg);
 	}
+
+	public void OnDrawGizmosSelected(){
+
+		Vector3 direction ;
+
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere (transform.position, BoidSpawner.S.nearDist);
+
+		Gizmos.color = Color.magenta;
+		if (neighbors.Count !=0) {
+			foreach(Boid b in neighbors) {
+				direction = b.transform.position - this.transform.position;
+				Gizmos.DrawRay(this.transform.position, direction); 
+				Gizmos.DrawSphere(b.transform.position, 0.25f);
+			}
+
+			Gizmos.color = Color.cyan;
+			direction =  closest.transform.position - this.transform.position;
+			Gizmos.DrawRay(this.transform.position, direction); 
+
+		}
+
+	}
 }
